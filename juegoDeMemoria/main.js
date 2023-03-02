@@ -29,6 +29,7 @@ function contarTiempo(){
         if(timer==0){
             clearInterval(tiempoRegresivoId);
             bloquearTarjetas();
+            mostrarTiempo.innerHTML = "Se te acabo el tiempo, perdiste";
         }
     },1000)
 }
@@ -38,6 +39,38 @@ function bloquearTarjetas(){
         let tarjetaBloqueada = document.getElementById(i);
         tarjetaBloqueada.innerHTML = numeros[i]
         tarjetaBloqueada.disabled=true;
+    }
+}
+
+function reiniciarJuego(){
+    clearInterval(tiempoRegresivoId);
+
+    //inicializacion de variables
+    tarjetasDestapadas = 0;
+    tarjeta1=null;
+    tarjeta2=null;
+    primerResultado=null;
+    segundoResultado=null;
+    movimientos=0;
+    aciertos=0;
+    temporizador=false;
+    timer = 30;
+    tiempoRegresivoId=null;
+    timerInicial = 30;
+
+    //apuntando a documentos HTML
+    mostrarMovimientos.innerHTML='Movimientos: '+movimientos;
+    mostrarAciertos.innerHTML='Aciertos: '+aciertos;
+    mostrarTiempo.innerHTML = "Tiempo: "+timer+" segundos";
+
+    //generacion de numeros aleatorios
+    numeros = numeros.sort(()=>Math.random()-0.5);
+    console.log(numeros);
+
+    for(let i=0;i<16;i++){
+        let tarjetaBloqueada = document.getElementById(i);
+        tarjetaBloqueada.innerHTML = " ";
+        tarjetaBloqueada.disabled=false;
     }
 }
 
